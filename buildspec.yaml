@@ -9,7 +9,7 @@ phases:
   build:
     commands:
       - |
-        docker build
+        docker build \
         --build-arg API_HOST=$(echo $API_HOST) \
         --build-arg PORT=$(echo $PORT) \
         --build-arg GITHUB_TOKEN=$(echo $GITHUB_TOKEN) \
