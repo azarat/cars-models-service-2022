@@ -8,7 +8,7 @@ import controller from './controller';
 
 const app = fasify({ logger: true })
 
-app.get(`/${config.apiEnv}/FuelService/health`, async () => 'Hello World')
+app.get(`/${config.apiEnv}/CarsModelService/health`, async () => 'Hello World')
 app.register(swagger, swaggerConfig)
 
 app.setErrorHandler((err, _, res) => {
@@ -19,7 +19,7 @@ app.setErrorHandler((err, _, res) => {
     res.status(500).send(err.message)
   }
 })
-app.register(controller, { prefix: `/${config.apiEnv}/FuelService/` }); // or delete options?
+app.register(controller, { prefix: `/${config.apiEnv}/CarsModelService/` }); // or delete options?
 
 const start = async () => {
   try {
