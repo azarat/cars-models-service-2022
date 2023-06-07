@@ -19,7 +19,7 @@ app.setErrorHandler((err, _, res) => {
     res.status(500).send(err.message)
   }
 })
-app.register(controller, { prefix: `/${config.apiEnv}/CarsModelService/` }); // or delete options?
+app.register(controller, { prefix: `/${config.apiEnv}/CarsModelService/` });
 
 const start = async () => {
   try {
