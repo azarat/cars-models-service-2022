@@ -2,7 +2,7 @@ import config from "../config/config"
 
 const swaggerCofig =  {
   exposeRoute: true,
-  routePrefix: '/docs',
+  routePrefix: `/${config.apiEnv}/FuelService/docs`,
   swagger: {
     host: config.apiHost,
     info: {

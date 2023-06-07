@@ -21,6 +21,7 @@ class Config {
     return secrets[secretName]
   }
 
+  readonly apiEnv: string
   readonly apiHost: string
   readonly port: string
   tableName: string
@@ -33,6 +34,7 @@ class Config {
   adminSecret: string
 
   constructor() {
+    this.apiEnv = process.env.API_ENV
     this.apiHost = process.env.API_HOST
     this.port = process.env.PORT
   }
