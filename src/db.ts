@@ -31,6 +31,8 @@ class DB {
 const createWhereCondition = (filter: IFilter) => {
   if (!filter) return ''
 
+  const currentYear = new Date().getFullYear();
+
   return `WHERE ${Object.keys(filter).reduce((acc, filterKey) => {
     if (filterKey === 'year') {
       return [
@@ -38,7 +40,7 @@ const createWhereCondition = (filter: IFilter) => {
         `safe_cast(yearStart AS INT64) <= ${filter[filterKey]} and CAST(
                   CASE
                         WHEN yearEnd = 'actual'
-                          THEN '2021'
+                          THEN '${currentYear}'
                         ELSE yearEnd
                   END AS INT64)  >= ${filter[filterKey]}`,
       ]
@@ -51,7 +53,7 @@ const getModification = async (fields: string[], filter: IFilter, unique: boolea
   const [job] = await DB.bigQueryClient.createQueryJob({
     query: `
         SELECT ${unique ? 'DISTINCT' : ''} ${fields.join(', ')} 
-        FROM \`${config.tableName}\`
+        FROM \`${config.apiEnv != 'v1' ? config.tableNameStage : config.tableName}\`
         ${createWhereCondition(filter)}`,
     location: 'US',
   })

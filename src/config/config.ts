@@ -21,9 +21,11 @@ class Config {
     return secrets[secretName]
   }
 
+  readonly apiEnv: string
   readonly apiHost: string
   readonly port: string
   tableName: string
+  tableNameStage: string
   projectId: string
   clientEmail: string
   clientId: string
@@ -33,12 +35,14 @@ class Config {
   adminSecret: string
 
   constructor() {
+    this.apiEnv = process.env.API_ENV
     this.apiHost = process.env.API_HOST
     this.port = process.env.PORT
   }
 
   async init(): Promise<void> {
     this.tableName = await Config.getSecret('TABLE_NAME')
+    this.tableNameStage = await Config.getSecret('TABLE_NAME_STAGE')
     this.projectId = await Config.getSecret('PROJECT_ID')
     this.clientEmail = await Config.getSecret('CLIENT_EMAIL')
     this.clientId = await Config.getSecret('CLIENT_ID')
