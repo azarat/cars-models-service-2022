@@ -29,3 +29,7 @@ export interface BodyDTO {
   filter: IFilter
   unique: boolean
 }
+
+export interface FilterDTO {
+  filterId?: number
+}

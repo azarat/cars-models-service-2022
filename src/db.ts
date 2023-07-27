@@ -53,7 +53,7 @@ const getModification = async (fields: string[], filter: IFilter, unique: boolea
   const [job] = await DB.bigQueryClient.createQueryJob({
     query: `
         SELECT ${unique ? 'DISTINCT' : ''} ${fields.join(', ')} 
-        FROM \`${config.apiEnv != 'v1' ? config.tableNameStage : config.tableName}\`
+        FROM \`${config.tableNameStage}\`
         ${createWhereCondition(filter)}`,
     location: 'US',
   })

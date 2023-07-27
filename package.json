@@ -18,7 +18,8 @@
     "aws-sdk": "^2.1039.0",
     "dotenv": "^10.0.0",
     "fastify": "^3.21.3",
-    "fastify-swagger": "^4.12.5"
+    "fastify-swagger": "^4.12.5",
+    "mongoose": "^7.4.1"
   },
   "devDependencies": {
     "@types/node": "^16.11.11",

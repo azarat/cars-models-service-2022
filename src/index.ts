@@ -5,6 +5,7 @@ import swaggerConfig from './swagger/swagger-config'
 import config from './config/config'
 import HttpError from './errors/http-error'
 import controller from './controller';
+import mongoose from 'mongoose'
 
 const app = fasify({ logger: true })
 
@@ -30,5 +31,10 @@ const start = async () => {
     process.exit(1)
   }
 }
+
+mongoose
+  .connect(`mongodb+srv://day_drive:dA6WG8ptfsQXfvb@day-drive-production.ekeqm.mongodb.net/cars`)
+  .then(() => app.log.info('MongoDB connected...'))
+  .catch(err => app.log.error(err));
 
 start()
