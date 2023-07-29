@@ -15,7 +15,7 @@ class Repository {
         return await Model.find(params).lean();
     }
 
-    async getGeneraions(modelId: number|undefined) {
+    async getGenerations(modelId: number|undefined) {
         let params = {}
         if (modelId != undefined) params = {id: modelId}
 

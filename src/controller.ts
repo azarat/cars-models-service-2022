@@ -51,7 +51,7 @@ const controller = (server: FastifyInstance, _, done) => {
   server.get<Headers<TokenHeader> & Body<FilterDTO>>(
     '/v2/makes',
     {
-      preValidation: VerifySecretMiddleware
+      preValidation: VerifyUserMiddleware
     },
     async (request) => {
       return repository.getMakes()
@@ -59,7 +59,7 @@ const controller = (server: FastifyInstance, _, done) => {
   server.get<Headers<TokenHeader> & Querystring<FilterDTO>>(
     '/v2/models',
     {
-      preValidation: VerifySecretMiddleware
+      preValidation: VerifyUserMiddleware
     },
     async (request) => {
       const {
@@ -69,22 +69,22 @@ const controller = (server: FastifyInstance, _, done) => {
       return repository.getModels(filterId)
     })
   server.get<Headers<TokenHeader> & Querystring<FilterDTO>>(
-    '/v2/generaions',
+    '/v2/generations',
     {
-      preValidation: VerifySecretMiddleware
+      preValidation: VerifyUserMiddleware
     },
     async (request) => {
       const {
         filterId,
       } = request.query
 
-      return repository.getGeneraions(filterId)
+      return repository.getGenerations(filterId)
     })
 
   server.get<Headers<TokenHeader> & Querystring<FilterDTO>>(
     '/v2/modifications',
     {
-      preValidation: VerifySecretMiddleware
+      preValidation: VerifyUserMiddleware
     },
     async (request) => {
       const {
