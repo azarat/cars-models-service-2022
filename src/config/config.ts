@@ -1,25 +1,25 @@
-import { SecretsManager } from 'aws-sdk'
+// import { SecretsManager } from 'aws-sdk'
 import * as dotenv from 'dotenv'
 
 dotenv.config()
 
 class Config {
-  private static readonly secrets = new SecretsManager({
-    region: process.env.AWS_REGION,
-  })
+  // private static readonly secrets = new SecretsManager({
+  //   region: process.env.AWS_REGION,
+  // })
 
-  private static readonly getSecret = async (
-    secretName: string,
-  ): Promise<string> => {
-    const { SecretString } = await Config.secrets
-      .getSecretValue({
-        SecretId: process.env.SECRET_ID,
-      })
-      .promise()
+  // private static readonly getSecret = async (
+  //   secretName: string,
+  // ): Promise<string> => {
+  //   const { SecretString } = await Config.secrets
+  //     .getSecretValue({
+  //       SecretId: process.env.SECRET_ID,
+  //     })
+  //     .promise()
 
-    const secrets = JSON.parse(SecretString)
-    return secrets[secretName]
-  }
+  //   const secrets = JSON.parse(SecretString)
+  //   return secrets[secretName]
+  // }
 
   readonly apiEnv: string
   readonly apiHost: string
@@ -38,18 +38,28 @@ class Config {
     this.apiEnv = process.env.API_ENV
     this.apiHost = process.env.API_HOST
     this.port = process.env.PORT
+
+    this.tableName = process.env.TABLE_NAME
+    this.tableNameStage = process.env.TABLE_NAME_STAGE
+    this.projectId = process.env.PROJECT_ID
+    this.clientEmail = process.env.CLIENT_EMAIL
+    this.clientId = process.env.CLIENT_ID
+    this.userSdkUrl = process.env.USER_SDK_URL
+    this.userSdkSecret = process.env.USER_SDK_SECRET
+    this.adminSecret = process.env.ADMIN_SECRET
+    this.bqPrivateKey = process.env.BQ_PRIVATE_KEY
   }
 
   async init(): Promise<void> {
-    this.tableName = await Config.getSecret('TABLE_NAME')
-    this.tableNameStage = await Config.getSecret('TABLE_NAME_STAGE')
-    this.projectId = await Config.getSecret('PROJECT_ID')
-    this.clientEmail = await Config.getSecret('CLIENT_EMAIL')
-    this.clientId = await Config.getSecret('CLIENT_ID')
-    this.userSdkUrl = await Config.getSecret('USER_SDK_URL')
-    this.userSdkSecret = await Config.getSecret('USER_SDK_SECRET')
-    this.adminSecret = await Config.getSecret('ADMIN_SECRET')
-    this.bqPrivateKey = await Config.getSecret('BQ_PRIVATE_KEY')
+    // this.tableName = await Config.getSecret('TABLE_NAME')
+    // this.tableNameStage = await Config.getSecret('TABLE_NAME_STAGE')
+    // this.projectId = await Config.getSecret('PROJECT_ID')
+    // this.clientEmail = await Config.getSecret('CLIENT_EMAIL')
+    // this.clientId = await Config.getSecret('CLIENT_ID')
+    // this.userSdkUrl = await Config.getSecret('USER_SDK_URL')
+    // this.userSdkSecret = await Config.getSecret('USER_SDK_SECRET')
+    // this.adminSecret = await Config.getSecret('ADMIN_SECRET')
+    // this.bqPrivateKey = await Config.getSecret('BQ_PRIVATE_KEY')
   }
 }
 
